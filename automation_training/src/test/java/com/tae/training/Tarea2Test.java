@@ -1,10 +1,9 @@
 package com.tae.training;
 
-<<<<<<< HEAD
-public class Tarea2Test {
-	
-	System.out.println("Algo");
-=======
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
 import java.util.ArrayList;
 
 import org.testng.annotations.AfterClass;
@@ -18,8 +17,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
->>>>>>> 54bc52798f17a3ee864dabb25c49381af6e9b7a6
+
+import com.beust.jcommander.Parameter;
 
 public class Tarea2Test {
 	@BeforeSuite
@@ -98,4 +99,16 @@ public class Tarea2Test {
 		
 		System.out.println("Concatenated words: "+array[0][0]+" "+array[0][1]+" "+array[0][2]);
 	}
+	
+	@Parameter(names="incomingDate")
+	@Test(groups={"Smoke"})
+	public void Test3(String incomingDate){
+		//incomingDate = "20/11/2017";
+		String day = incomingDate.substring(0, 1);
+		String month = incomingDate.substring(3, 4);
+		String year = incomingDate.substring(6, 10);
+		System.out.println("Date in format YYYY/MM/DD: "+year+"/"+month+"/"+day);
+		System.out.println("IncomingDate: "+incomingDate);
+	}
+
 }
