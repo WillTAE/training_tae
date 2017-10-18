@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Tarea2 Suite" verbose="1">
+	<!--<listeners>
+		<listener class-name="com.automation.training.MyCoolListener"></listener>
+	</listeners> -->
+	<!--  <parameter name="stringA" value="I love " />
+	<parameter name="stringB" value="test automation" /> 
+	<parameter name="browser" value="firefox"/> -->
+	<test name="My first test">
+		<classes>
+			<!--  <class name="com.automation.training.AnnotationTests"></class> -->
+			<class name="com.tae.training.Tarea2Test"></class>
+		</classes>
+
+	</test>
+</suite>
