@@ -73,20 +73,14 @@ public class Tarea2Test {
 			};
 		}
 	
-	@SuppressWarnings("rawtypes")
 	@DataProvider(name = "words")
-	   private Object [][] getWords(ArrayList[][] array) { 
-	       /*return new Object[][]{
-	    	{"s1", "Testing"},
-	       	{"s2", "Automation"},
-	       	{"s3", "Engineer"}
-	       	}; */
-		Object[][] getWords = new Object[1][3];
-		getWords[0][0] = "Testing";
-		getWords[0][1] = "Automation";
-		getWords[0][2] = "Engineer";
-		getWords[0][3] = "Rocks";
-		return getWords;
+	   private Object [][] getWords() { 
+		return new Object[][]{
+			{"Testing","Automation","Engineer"},
+			{"One","Two","Three"},
+			{"Programming","Object","Oriented"},
+			{"Second","Test","Solved"}
+		};
 	    }
 	
 	@Test(groups={"Regression","Smoke"}, dataProvider="numbers")
@@ -95,20 +89,19 @@ public class Tarea2Test {
 	}
 	
 	@Test(groups={"Regression", "Smoke"}, dataProvider="words")
-	public void Test2(ArrayList<String>array[][]){
+	public void Test2(String s1, String s2, String s3){
 		
-		System.out.println("Concatenated words: "+array[0][0]+" "+array[0][1]+" "+array[0][2]);
+		System.out.println("Concatenated words: "+s1 + " "+ s2+ " "+s3);
 	}
 	
-	@Parameter(names="incomingDate")
+	/*@Parameter(names="incomingDate")
 	@Test(groups={"Smoke"})
 	public void Test3(String incomingDate){
-		//incomingDate = "20/11/2017";
 		String day = incomingDate.substring(0, 1);
 		String month = incomingDate.substring(3, 4);
 		String year = incomingDate.substring(6, 10);
 		System.out.println("Date in format YYYY/MM/DD: "+year+"/"+month+"/"+day);
 		System.out.println("IncomingDate: "+incomingDate);
-	}
+	}*/
 
 }
