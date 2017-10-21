@@ -7,11 +7,11 @@
 	</listeners> -->
 	<!--  <parameter name="stringA" value="I love " />
 	<parameter name="stringB" value="test automation" /> -->
-	<parameter name="incomingDate" value="20/11/2017"/> 
+	<parameter name="incomingDate" value="20/10/2017"/> 
 	<test name="My first test">
 		<groups>
 			<run>
-				<include name="Smoke"/>
+				<include name="Regression"/>
 			</run>
 		</groups>
 		<classes>

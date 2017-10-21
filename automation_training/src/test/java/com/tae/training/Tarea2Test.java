@@ -4,7 +4,13 @@ package com.tae.training;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterGroups;
@@ -84,24 +90,28 @@ public class Tarea2Test {
 	    }
 	
 	@Test(groups={"Regression","Smoke"}, dataProvider="numbers")
-	public void Test1(int a, int b){
+	public void test1(int a, int b){
 		System.out.println("Result mult: "+ a*b);
 	}
 	
 	@Test(groups={"Regression", "Smoke"}, dataProvider="words")
-	public void Test2(String s1, String s2, String s3){
+	public void test2(String s1, String s2, String s3){
 		
 		System.out.println("Concatenated words: "+s1 + " "+ s2+ " "+s3);
 	}
 	
-	/*@Parameter(names="incomingDate")
+	@Parameters({"incomingDate"})
 	@Test(groups={"Smoke"})
-	public void Test3(String incomingDate){
-		String day = incomingDate.substring(0, 1);
-		String month = incomingDate.substring(3, 4);
-		String year = incomingDate.substring(6, 10);
-		System.out.println("Date in format YYYY/MM/DD: "+year+"/"+month+"/"+day);
-		System.out.println("IncomingDate: "+incomingDate);
-	}*/
+	public void test3(String incomingDate) throws ParseException{
+		final String OLD_FORMAT = "dd/MM/yyyy";
+		final String NEW_FORMAT = "yyyy/MM/dd";
+		String newDateString;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+		Date d = sdf.parse(incomingDate);
+		sdf.applyPattern(NEW_FORMAT);
+		newDateString = sdf.format(d);
+		System.out.println("Date in format YYYY/MM/DD: "+newDateString);
+	}
 
 }
