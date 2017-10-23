@@ -1,6 +1,7 @@
 package com.tae.training;
 
 
+import org.testng.TestNG;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
@@ -11,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterGroups;
@@ -28,7 +30,8 @@ import org.testng.annotations.Test;
 
 import com.beust.jcommander.Parameter;
 
-public class Tarea2Test {
+public class Tarea2Test extends TestNG{
+	
 	@BeforeSuite
 	public void beforeSuite(){
 		System.out.println("Before Suite");
@@ -70,31 +73,12 @@ public class Tarea2Test {
 		System.out.println("After Suite");
 	}
 	
-	@DataProvider(name="numbers")
-	public Object[][] getNumbers(){
-		return new Object[][] {
-			{new Integer(4), new Integer(7)},
-			{new Integer(6), new Integer(25)},
-			{new Integer(12), new Integer(8)}
-			};
-		}
-	
-	@DataProvider(name = "words")
-	   private Object [][] getWords() { 
-		return new Object[][]{
-			{"Testing","Automation","Engineer"},
-			{"One","Two","Three"},
-			{"Programming","Object","Oriented"},
-			{"Second","Test","Solved"}
-		};
-	    }
-	
-	@Test(groups={"Regression","Smoke"}, dataProvider="numbers")
+	@Test(groups={"Regression","Smoke"}, dataProvider="numbers", dataProviderClass=DataProvidersSource.class)
 	public void test1(int a, int b){
 		System.out.println("Result mult: "+ a*b);
 	}
 	
-	@Test(groups={"Regression", "Smoke"}, dataProvider="words")
+	@Test(groups={"Regression", "Smoke"}, dataProvider="words", dataProviderClass=DataProvidersSource.class)
 	public void test2(String s1, String s2, String s3){
 		
 		System.out.println("Concatenated words: "+s1 + " "+ s2+ " "+s3);
@@ -112,6 +96,21 @@ public class Tarea2Test {
 		sdf.applyPattern(NEW_FORMAT);
 		newDateString = sdf.format(d);
 		System.out.println("Date in format YYYY/MM/DD: "+newDateString);
+	}
+	
+	@Parameters({"Envs"})
+	@Test(groups={"Smoke"})
+	public void test4(String env){
+		Random random = new Random();
+		int num1 = random.nextInt(20)+1;
+		int num2 = random.nextInt(10)+1;
+		if(env.equals("AMBIENTE1")){
+			System.out.println("Numbers for the operation: "+num1 +" and "+num2);
+			System.out.println("Mult = "+ num1*num2);
+		}else if(env.equals("AMBIENTE2")){
+			System.out.println("Numbers for the operation: "+num1 +" and "+num2);
+			System.out.println("Resta = "+ (num1-num2));
+		}
 	}
 
 }
