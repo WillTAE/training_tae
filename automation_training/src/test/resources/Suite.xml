@@ -2,12 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Tarea2 Suite" verbose="1">
-	<parameter name="Envs" value="AMBIENTE1" />
+	<!--<listeners>
+		<listener class-name="com.automation.training.MyCoolListener"></listener>
+	</listeners> -->
+	<!--  <parameter name="stringA" value="I love " />
+	<parameter name="stringB" value="test automation" /> -->
 	<parameter name="incomingDate" value="20/10/2017"/> 
 	<test name="My first test">
 		<groups>
 			<run>
-				<include name="Smoke"/>
+				<include name="Regression"/>
 			</run>
 		</groups>
 		<classes>
