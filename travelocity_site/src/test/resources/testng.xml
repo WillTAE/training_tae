@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="My Test Suite" verbose="1">
+	<parameter name="browser" value="firefox"></parameter>
+	<test name="My first test">
+		<classes>
+			<class name="com.tae.training.tests.TestTravelocity"></class>
+		</classes>
+	</test>
+</suite>
