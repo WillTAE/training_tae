@@ -1,10 +1,13 @@
 package com.tae.training.pages;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomeTravelocityPage extends BasePage{
 
@@ -41,15 +44,50 @@ public class HomeTravelocityPage extends BasePage{
 	@FindBy(how=How.ID, using="flight-adults-hp-flight")
 	private WebElement flightAdultsSelector;
 	
-	@FindBy(how=How.CLASS_NAME, using="btn-primary")
+	@FindBy(how=How.CLASS_NAME, using="gcw-submit")
 	private WebElement searchButton;
 	
-	public ResultsPage searchFlights(){
+	@FindBy(how=How.XPATH, using="//*[@id='flight-departing-wrapper-hp-flight']/div/div/button[2]")
+	private WebElement datePickerRightArrow;
+	
+	@FindBy(how=How.ID, using="flightSearchResultDiv")
+	private WebElement PROGRESS_BAR;
+	
+	@FindBy(xpath="//*[@id='flight-departing-wrapper-hp-flight']/div/div/div[2]")
+	private WebElement departingCalendar;
+	
+	@FindBy(xpath="//*[@id='flight-returning-wrapper-hp-flight']/div/div")
+	private WebElement returningCalendar;
+	
+	//public static final By PROGRESS_BAR = By.id("flightSearchResultDiv");
+	
+	public ResultsPage searchFlights(String departingTo, String arrivingTo, String departingDay, String returningDay){
 		flighTab.click();
 		flightTypeRoundtrip.click();
-		flightOriginField.sendKeys("LAS");
-		flightDestinationField.sendKeys("LAX");
+		flightOriginField.sendKeys(departingTo);
+		flightDestinationField.sendKeys(arrivingTo);
+		flightDepartingCalendar.clear();
+		flightDepartingCalendar.click();
+		datePickerRightArrow.click();
+		datePickerRightArrow.click();
+		List<WebElement> columns = departingCalendar.findElements(By.tagName("td"));
+		for(WebElement cell: columns){
+			if(cell.getText().equals(departingDay)){
+				cell.click();
+				break;
+			}
+		}
+		flightReturningCalendar.clear();
+		flightReturningCalendar.click();
+		List<WebElement> columnsB = returningCalendar.findElements(By.tagName("td"));
+		for(WebElement cell2: columnsB){
+			if(cell2.getText().equals(returningDay)){
+				cell2.click();
+				break;
+			}
+		}
 		searchButton.click();
+		getWait().until(ExpectedConditions.visibilityOf(PROGRESS_BAR));
 		return new ResultsPage(getDriver());
 	}
 }

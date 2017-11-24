@@ -21,7 +21,8 @@ public class BaseTest {
 	
 	@AfterSuite(alwaysRun=true)
 	public void afterSuite(){
-		homeTravelocityPage.dispose();
+		System.out.println("Disposing");
+		//homeTravelocityPage.dispose();
 	}
 
 	public HomeTravelocityPage getHomeTravelocityPage() {
