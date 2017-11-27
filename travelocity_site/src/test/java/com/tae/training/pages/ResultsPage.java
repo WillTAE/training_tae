@@ -54,7 +54,9 @@ public class ResultsPage extends BasePage {
 	public boolean verifySelectButtonsPresent() {
 		boolean selectsPresent = false;
 		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
-		getWait().until(ExpectedConditions.visibilityOf(selectButton));
+		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
+		getWait().until(ExpectedConditions.elementToBeClickable(selectButton));
+		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
 		System.out.println("número de panels: " + resultRows.size());
 		if (resultRows.size() > 0)
 			selectsPresent = true;
@@ -125,6 +127,23 @@ public class ResultsPage extends BasePage {
 		}
 		return listCorrectlySorted;
 		
+	}
+	
+	public DeparturesPage selectingDeparture(){
+		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
+		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
+		for(int i=0; i<resultRows.size()-1; i++){
+			if(i == 0){
+				WebElement panelForElement = (WebElement)resultRows.get(i);
+				WebElement elementToSelect = panelForElement.findElement(By.className("t-select-btn"));
+				System.out.println("Element to Select label: "+elementToSelect.getText());
+				elementToSelect.click();
+				break;
+			}
+			
+		}
+		
+		return new DeparturesPage(getDriver()); 
 	}
 
 }
