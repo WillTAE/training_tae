@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +15,6 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
 
 public class ResultsPage extends BasePage {
 
@@ -55,7 +55,7 @@ public class ResultsPage extends BasePage {
 		boolean selectsPresent = false;
 		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
 		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
-		getWait().until(ExpectedConditions.elementToBeClickable(selectButton));
+		getWait().withTimeout(40, TimeUnit.SECONDS).until(ExpectedConditions.elementToBeClickable(selectButton));
 		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
 		System.out.println("número de panels: " + resultRows.size());
 		if (resultRows.size() > 0)
@@ -70,6 +70,8 @@ public class ResultsPage extends BasePage {
 
 	public boolean verifyFlightDurationLabels() {
 		boolean flightDurationIsPresent = false;
+		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
+		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
 		if (resultRows.size() > 0)
 			flightDurationIsPresent = true;
 		for (WebElement panelRow : resultRows) {
@@ -94,10 +96,15 @@ public class ResultsPage extends BasePage {
 	public boolean verifyListCorrectlySorted(){
 		boolean listCorrectlySorted = false;
 		Duration lastDuration = Duration.ZERO;
+		getWait().withTimeout(50, TimeUnit.SECONDS).until(ExpectedConditions.elementToBeClickable(priceDropdown));
 		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
 		Select selectDropdown = new Select(priceDropdown);
 		selectDropdown.selectByIndex(2);
-		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
+		if(getDriver().getWindowHandles().toArray().length > 1){
+			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[1]);
+			getDriver().close();
+			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);
+		}
 		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
 		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
 		System.out.println("ResultRows size: "+resultRows.size());
@@ -138,6 +145,11 @@ public class ResultsPage extends BasePage {
 				WebElement elementToSelect = panelForElement.findElement(By.className("t-select-btn"));
 				System.out.println("Element to Select label: "+elementToSelect.getText());
 				elementToSelect.click();
+				if(getDriver().getWindowHandles().toArray().length > 1){
+					getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[1]);
+					getDriver().close();
+					getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);
+				}
 				break;
 			}
 			

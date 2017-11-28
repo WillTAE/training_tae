@@ -87,6 +87,11 @@ public class HomeTravelocityPage extends BasePage{
 			}
 		}
 		searchButton.click();
+		if(getDriver().getWindowHandles().toArray().length > 1){
+			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[1]);
+			getDriver().close();
+			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);
+		}
 		getWait().until(ExpectedConditions.visibilityOf(PROGRESS_BAR));
 		return new ResultsPage(getDriver());
 	}
