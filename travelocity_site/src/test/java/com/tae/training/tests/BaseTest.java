@@ -11,7 +11,7 @@ public class BaseTest {
 	MyDriver myDriver;
 	
 	private HomeTravelocityPage homeTravelocityPage;
-	
+		
 	@BeforeSuite(alwaysRun=true)
 	@Parameters({"browser"})
 	public void beforeSuite(String browser){

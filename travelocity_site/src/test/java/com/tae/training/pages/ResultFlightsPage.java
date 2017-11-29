@@ -16,9 +16,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 
-public class ResultsPage extends BasePage {
+public class ResultFlightsPage extends BasePage {
 
-	public ResultsPage(WebDriver driver) {
+	public ResultFlightsPage(WebDriver driver) {
 		super(driver);
 	}
 
@@ -160,8 +160,3 @@ public class ResultsPage extends BasePage {
 
 }
 
-/*if(getDriver().getWindowHandles().toArray().length > 1){
-getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[1]);
-getDriver().close();
-getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);
-}*/

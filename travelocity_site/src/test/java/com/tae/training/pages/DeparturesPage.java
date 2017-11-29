@@ -39,12 +39,12 @@ public class DeparturesPage extends BasePage {
 	
 	public ReviewYourTripPage selectReturning(){
 		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
-		getWait().withTimeout(40, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(resultsListPanel));
+		//getWait().withTimeout(40, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(resultsListPanel));
 		for(int i=0; i<resultRows.size()-1; i++){
 			if(i == 2){
 				WebElement panelForElement = (WebElement)resultRows.get(i);
 				getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
-				getWait().withTimeout(20, TimeUnit.SECONDS).until(ExpectedConditions.elementToBeClickable(selectButton));
+				getWait().withTimeout(60, TimeUnit.SECONDS).until(ExpectedConditions.elementToBeClickable(selectButton));
 				WebElement elementToSelect = panelForElement.findElement(By.className("t-select-btn"));
 				System.out.println("Element to Select label: "+elementToSelect.getText());
 				elementToSelect.click();
@@ -57,15 +57,8 @@ public class DeparturesPage extends BasePage {
 			}
 			
 		}
-		/*String handle = getDriver().getWindowHandle();
-		String subHandle = null;
-		Set<String> handles = getDriver().getWindowHandles();
-		Iterator<String> iterator = handles.iterator();
-		while(iterator.hasNext()){
-			subHandle = iterator.next();
-		}
-		getDriver().switchTo().window(subHandle);*/
-		getWait().withTimeout(10, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(modalHotelPlusNoThanks));
+		
+		getWait().until(ExpectedConditions.elementToBeClickable(choiceNoThanks));
 		choiceNoThanks.click();
 		//getDriver().switchTo().window(handle);
 		

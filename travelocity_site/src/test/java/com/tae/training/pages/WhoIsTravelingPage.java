@@ -1,7 +1,5 @@
 package com.tae.training.pages;
 
-import static org.testng.Assert.expectThrows;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +24,12 @@ public class WhoIsTravelingPage extends BasePage {
 	@FindBy(className= "faceoff-module-title")
 	private WebElement formTitle;
 	
+	@FindBy(className= "date-info")
+	private WebElement dateOfTripInfo;
+	
+	@FindBy(how = How.CLASS_NAME, using = "traveler-name-label")
+	private WebElement travelerNameField;
+	
 	public boolean verifyFormTitleIsPresent(){
 		boolean formTitlePresent = false;
 		getWait().until(ExpectedConditions.visibilityOf(genericPageHeader));
@@ -44,6 +48,25 @@ public class WhoIsTravelingPage extends BasePage {
 		boolean formTitlePresent = false;
 		getWait().until(ExpectedConditions.visibilityOf(genericPageHeader));
 		if(genericPageHeader.getText()!=null) formTitlePresent = true;
+		return formTitlePresent; 
+	}
+	
+	public boolean verifyDateOfTripIsPresent(){
+		boolean formTitlePresent = false;
+		getWait().until(ExpectedConditions.visibilityOf(genericPageHeader));
+		if(dateOfTripInfo.getText()!=null) formTitlePresent = true;
+		return formTitlePresent; 
+	}
+	
+	public boolean verifyTravelerNameFieldIsPresent(){
+		boolean formTitlePresent = false;
+		getWait().until(ExpectedConditions.visibilityOf(genericPageHeader));
+		if(travelerNameField.getText()!=null) formTitlePresent = true;
+		if(getDriver().getWindowHandles().toArray().length > 1){
+			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[1]);
+			getDriver().close();
+			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);
+		}
 		return formTitlePresent; 
 	}
 

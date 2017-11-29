@@ -9,26 +9,26 @@ import org.testng.annotations.Test;
 
 import com.tae.training.pages.DeparturesPage;
 import com.tae.training.pages.HomeTravelocityPage;
-import com.tae.training.pages.ResultsPage;
+import com.tae.training.pages.ResultFlightsPage;
 import com.tae.training.pages.ReviewYourTripPage;
 import com.tae.training.pages.WhoIsTravelingPage;
 
 public class TestTravelocity extends BaseTest {
-	@Test
+	//@Test
 	public void exercise1(){
 		HomeTravelocityPage homeTravelocityPage = getHomeTravelocityPage();
-		ResultsPage resultsPage = homeTravelocityPage.searchFlights("LAS","LAX","20","1");
-		assertEquals(resultsPage.getResultsPageTitle(), "Select your departure to Los Angeles");
-		assertTrue(resultsPage.verifyPriceDropdownIsPresent());
-		//assertTrue(resultsPage.verifySelectButtonsPresent());
-		//assertTrue(resultsPage.verifyFlightDurationLabels());
-		//assertTrue(resultsPage.verifyFlighDetailsAndBaggageFee());
-		//assertTrue(resultsPage.verifyListCorrectlySorted());
+		ResultFlightsPage resultFlightsPage = homeTravelocityPage.searchFlights("LAS","LAX","20","1");
+		assertEquals(resultFlightsPage.getResultsPageTitle(), "Select your departure to Los Angeles");
+		assertTrue(resultFlightsPage.verifyPriceDropdownIsPresent());
+		//assertTrue(resultFlightsPage.verifySelectButtonsPresent());
+		//assertTrue(resultFlightsPage.verifyFlightDurationLabels());
+		//assertTrue(resultFlightsPage.verifyFlighDetailsAndBaggageFee());
+		//assertTrue(resultFlightsPage.verifyListCorrectlySorted());
 		
-		DeparturesPage departuresPage = resultsPage.selectingDeparture();
+		DeparturesPage departuresPage = resultFlightsPage.selectingDeparture();
 		
 		ReviewYourTripPage reviewYourTripPage = departuresPage.selectReturning();
-		//assertTrue(reviewYourTripPage.verifyTotalPriceIsPresent());
+		assertTrue(reviewYourTripPage.verifyTotalPriceIsPresent());
 		assertTrue(reviewYourTripPage.verifyDepartAndReturnInfoIsPresent());
 		assertTrue(reviewYourTripPage.verifyPriceGuaranteeTextIsPresent());
 		
@@ -36,6 +36,14 @@ public class TestTravelocity extends BaseTest {
 		assertTrue(whoIsTraveling.verifyFormTitleIsPresent());
 		assertTrue(whoIsTraveling.verifyOriginAndDestinyIsPresent());
 		assertTrue(whoIsTraveling.verifyGenericPageHeaderIsPresent());
+		assertTrue(whoIsTraveling.verifyDateOfTripIsPresent());
+		assertTrue(whoIsTraveling.verifyTravelerNameFieldIsPresent());
+	}
+	
+	@Test
+	public void exercise2(){
+		HomeTravelocityPage homeTravelocityPage = getHomeTravelocityPage();
+		homeTravelocityPage.searchFlightHotelAndCar("LAS", "LAX", "28", "10");
 		
 	}
 }

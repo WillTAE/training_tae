@@ -54,8 +54,8 @@ public class ReviewYourTripPage extends BasePage {
 		getWait().until(ExpectedConditions.visibilityOf(pageTitle));
 		List<WebElement> tableRows = informationTable.findElements(By.className("type-300"));
 		for(WebElement row: tableRows){
-			if (row.findElement(By.xpath("/html/body/main/section[1]/div/div[1]/div/div/div[1]/ol/li[1]/span[2]")).getText() != null && 
-					row.findElement(By.xpath("/html/body/main/section[1]/div/div[1]/div/div/div[1]/ol/li[2]/span[2]")).getText() != null){
+			if (row.findElement(By.xpath("//section[@class='flightSummaryContainer uitk-col']/div/div[1]//ol[@class='odPair nobullet']/li[1]/span[2]")).getText() != null && 
+					row.findElement(By.xpath("//section[@class='flightSummaryContainer uitk-col']/div/div[1]//ol[@class='odPair nobullet']/li[2]/span[2]")).getText() != null){
 				departAndReturnInfoIsPresent = true;
 			}
 		}
