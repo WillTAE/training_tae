@@ -67,6 +67,7 @@ public class WhoIsTravelingPage extends BasePage {
 			getDriver().close();
 			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);
 		}
+		FlightHotelPage flightHotelPage = new FlightHotelPage(getDriver());
 		return formTitlePresent; 
 	}
 

@@ -10,7 +10,7 @@ import com.tae.training.pages.MyDriver;
 public class BaseTest {
 	MyDriver myDriver;
 	
-	private HomeTravelocityPage homeTravelocityPage;
+	protected HomeTravelocityPage homeTravelocityPage;
 		
 	@BeforeSuite(alwaysRun=true)
 	@Parameters({"browser"})
