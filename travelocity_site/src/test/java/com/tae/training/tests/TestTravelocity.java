@@ -57,6 +57,10 @@ public class TestTravelocity extends BaseTest {
 		softAssert.assertTrue(resultFlightHotelsPage.searchByPropertyBoxIsPresent(), "Not able to verify Search Hotel input is present");
 		softAssert.assertTrue(resultFlightHotelsPage.submitHotelGoButtonDisabled(), "Not able to verify if Go button is disabled");
 		
-		resultFlightHotelsPage.sortingHotelsByPrice();
+		softAssert.assertTrue(resultFlightHotelsPage.verifyListPricesIsCorrectlyOrdered(), "List of Hotel prices is not properly sorted");
+		
+		resultFlightHotelsPage.selectThreeStarsHotel();
+	
+		
 	}
 }
