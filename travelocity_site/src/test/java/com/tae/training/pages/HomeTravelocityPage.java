@@ -98,4 +98,20 @@ public class HomeTravelocityPage extends BasePage{
 	public FlightHotelPage getFlightHotelPage(WebDriver driver) {
 		return new FlightHotelPage(driver);
 	}
+	
+	public SelectedHotelPage getSelectedHotelPage(WebDriver driver){
+		return new SelectedHotelPage(driver);
+	}
+	
+	public DeparturesFlightHotelPage getDeparturesFlightHotelPage(WebDriver driver){
+		return new DeparturesFlightHotelPage(getDriver());
+	}
+	
+	public ReturningFlightHotelPage getReturningFlightHotelPage(WebDriver driver){
+		return new ReturningFlightHotelPage(getDriver());
+	}
+	
+	public CarSelectionPage getCarSelectionPage(WebDriver driver){
+		return new CarSelectionPage(getDriver());
+	}
 }

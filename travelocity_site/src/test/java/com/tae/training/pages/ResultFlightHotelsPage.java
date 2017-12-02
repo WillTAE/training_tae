@@ -21,7 +21,9 @@ public class ResultFlightHotelsPage extends BasePage {
 	}
 
 	Utils utils = new Utils();
-
+	String numOfStars;
+	String hotelNameLabel;
+	
 	@FindBy(how = How.ID, using = "resultsContainer")
 	private WebElement resultsContainer;
 
@@ -103,6 +105,10 @@ public class ResultFlightHotelsPage extends BasePage {
 		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(hotelPricesContainer)));
 	}
 
+	/**
+	 * Pendiente corregir para pasar los precios a floats y que pueda comparar cuando son valores como por ejemplo 1,234
+	 * @return
+	 */
 	public boolean verifyListPricesIsCorrectlyOrdered() {
 		boolean listCorrectlySorted = true;
 		clickOnSortByPrice();
@@ -126,18 +132,32 @@ public class ResultFlightHotelsPage extends BasePage {
 		return listCorrectlySorted;
 	}
 	
-	public void selectThreeStarsHotel(){
-		List<WebElement> listOfStarPanels = resultsContainer.findElements(By.className("value-title"));
-		System.out.println("Number of star Panels: "+listOfStarPanels.size());
+	public SelectedHotelPage selectThreeStarsHotel(){
+		List<WebElement> listOfStarPanels = resultsContainer.findElements(By.tagName("article"));
 		for(WebElement moreThanThreeStars: listOfStarPanels){
-			String numOfStars = moreThanThreeStars.getAttribute("title").toString();
+			WebElement starsPanel = moreThanThreeStars.findElement(By.className("flex-area-primary"));
+			hotelNameLabel = moreThanThreeStars.findElement(By.className("fakeLink")).getText();
+			numOfStars = starsPanel.findElement(By.className("value-title")).getAttribute("title");
 			float starsNumber = Float.parseFloat(numOfStars);
-			System.out.println("Number in float: "+starsNumber);
 			if(starsNumber >= 3){
 				moreThanThreeStars.click();
 				break;
 			}
 		}
+		if(getDriver().getWindowHandles().toArray().length > 1){
+			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[1]);
+			/*getDriver().close();
+			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);*/
+		}
+		return new SelectedHotelPage(getDriver());
+	}
+
+	public String getHotelNameLabel() {
+		return hotelNameLabel;
+	}
+	
+	public String getNumOfStars() {
+		return numOfStars;
 	}
 
 }
