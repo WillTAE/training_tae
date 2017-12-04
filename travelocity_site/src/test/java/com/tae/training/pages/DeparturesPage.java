@@ -39,7 +39,7 @@ public class DeparturesPage extends BasePage {
 	
 	public ReviewYourTripPage selectReturning(){
 		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
-		//getWait().withTimeout(40, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(resultsListPanel));
+		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("t-select-btn"))));
 		for(int i=0; i<resultRows.size()-1; i++){
 			if(i == 2){
 				WebElement panelForElement = (WebElement)resultRows.get(i);

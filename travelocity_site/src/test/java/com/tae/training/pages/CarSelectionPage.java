@@ -17,16 +17,20 @@ public class CarSelectionPage extends BasePage {
 	
 	@FindBy(how = How.ID, using="search-results")
 	private WebElement carsListContainer;
+	//locator for the next page
+	@FindBy(how = How.ID, using = "trip-summary")
+	private WebElement tripSummarySection;
 	
 	//book-container
 	public ReviewAndBookPage selectACar(){
-		getWait().until(ExpectedConditions.refreshed(ExpectedConditions
-				.visibilityOfAllElementsLocatedBy(By.className("listing-wrapper"))));
-		List<WebElement> carsList = carsListContainer.findElements(By.className("listing-wrapper"));
+		/*getWait().until(ExpectedConditions.refreshed(ExpectedConditions
+				.visibilityOfAllElementsLocatedBy(By.tagName("li"))));*/
+		List<WebElement> carsList = carsListContainer.findElements(By.className("book-container"));
 		for (WebElement carOptions: carsList){
 			carOptions.findElement(By.tagName("a")).click();
 			break;
 		}
+		getWait().until(ExpectedConditions.visibilityOf(tripSummarySection));
 		return new ReviewAndBookPage(getDriver());
 	}
 

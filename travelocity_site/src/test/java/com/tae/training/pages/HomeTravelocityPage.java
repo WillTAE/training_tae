@@ -114,4 +114,16 @@ public class HomeTravelocityPage extends BasePage{
 	public CarSelectionPage getCarSelectionPage(WebDriver driver){
 		return new CarSelectionPage(getDriver());
 	}
+	
+	public ReviewAndBookPage getReviewAndBookPage(WebDriver driver){
+		return new ReviewAndBookPage(getDriver());
+	}
+	
+	public HotelsPage getHotelsPage(WebDriver driver){
+		return new HotelsPage(getDriver());
+	}
+	
+	public ResultsHotelOnlyPage getResultsHotelOnlyPage(WebDriver driver){
+		return new ResultsHotelOnlyPage(getDriver());
+	}
 }

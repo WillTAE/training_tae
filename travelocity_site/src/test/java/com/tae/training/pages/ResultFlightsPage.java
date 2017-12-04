@@ -53,8 +53,8 @@ public class ResultFlightsPage extends BasePage {
 
 	public boolean verifySelectButtonsPresent() {
 		boolean selectsPresent = false;
-		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
 		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
+		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("flex-card-offer"))));
 		getWait().withTimeout(40, TimeUnit.SECONDS).until(ExpectedConditions.elementToBeClickable(selectButton));
 		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
 		System.out.println("número de panels: " + resultRows.size());
@@ -71,6 +71,7 @@ public class ResultFlightsPage extends BasePage {
 	public boolean verifyFlightDurationLabels() {
 		boolean flightDurationIsPresent = false;
 		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
+		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("flex-card-offer"))));
 		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
 		if (resultRows.size() > 0)
 			flightDurationIsPresent = true;
@@ -84,6 +85,7 @@ public class ResultFlightsPage extends BasePage {
 
 	public boolean verifyFlighDetailsAndBaggageFee() {
 		boolean flighDetailIsPresent = false;
+		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfElementLocated(By.className("show-flight-details"))));
 		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
 		for (WebElement panelRow : resultRows) {
 			if (panelRow.findElements(By.className("show-flight-details")) != null) {
@@ -105,7 +107,7 @@ public class ResultFlightsPage extends BasePage {
 			getDriver().close();
 			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);
 		}
-		getWait().until(ExpectedConditions.visibilityOf(resultsListPanel));
+		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("flex-card-offer"))));
 		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
 		System.out.println("ResultRows size: "+resultRows.size());
 		for(int i = 0; i<resultRows.size()-1; i++){
@@ -138,6 +140,7 @@ public class ResultFlightsPage extends BasePage {
 	
 	public DeparturesPage selectingDeparture(){
 		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
+		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("flex-card-offer"))));
 		List<WebElement> resultRows = resultsListPanel.findElements(By.className("flex-card-offer"));
 		for(int i=0; i<resultRows.size()-1; i++){
 			if(i == 0){

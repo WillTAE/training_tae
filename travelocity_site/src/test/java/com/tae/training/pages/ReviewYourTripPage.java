@@ -42,6 +42,7 @@ public class ReviewYourTripPage extends BasePage {
 	
 	public boolean verifyTotalPriceIsPresent(){
 		boolean totalPricePresent = false;
+		getWait().until(ExpectedConditions.visibilityOf(totalPriceLabel));
 		System.out.println("Texto: "+totalPriceLabel.getText());
 		if (totalPriceLabel.getText() != null){
 			totalPricePresent = true;
@@ -52,6 +53,7 @@ public class ReviewYourTripPage extends BasePage {
 	public boolean verifyDepartAndReturnInfoIsPresent(){
 		boolean departAndReturnInfoIsPresent = false;
 		getWait().until(ExpectedConditions.visibilityOf(pageTitle));
+		getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("type-300")));
 		List<WebElement> tableRows = informationTable.findElements(By.className("type-300"));
 		for(WebElement row: tableRows){
 			if (row.findElement(By.xpath("//section[@class='flightSummaryContainer uitk-col']/div/div[1]//ol[@class='odPair nobullet']/li[1]/span[2]")).getText() != null && 
@@ -65,6 +67,7 @@ public class ReviewYourTripPage extends BasePage {
 	public boolean verifyPriceGuaranteeTextIsPresent(){
 		boolean priceGuaranteeIsPresent = false;
 		getWait().until(ExpectedConditions.visibilityOf(pageTitle));
+		getWait().until(ExpectedConditions.elementToBeClickable(priceGuranteeText));
 		if(priceGuranteeText.getText() != null){
 			priceGuaranteeIsPresent = true;
 		}
@@ -72,6 +75,7 @@ public class ReviewYourTripPage extends BasePage {
 	}
 	
 	public WhoIsTravelingPage navigateToWhoIsTraveling(){
+		getWait().until(ExpectedConditions.elementToBeClickable(bookingButton));
 		bookingButton.click();
 		return new WhoIsTravelingPage(getDriver());
 	}

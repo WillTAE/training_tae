@@ -91,7 +91,6 @@ public class FlightHotelPage extends BasePage {
 				getDriver().close();
 				getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);
 			}
-			//getWait().withTimeout(40, TimeUnit.SECONDS).
 			getWait().withTimeout(40, TimeUnit.SECONDS).until(ExpectedConditions.visibilityOf(resultHotelsContainer));
 			utils.waitForPageLoaded(getDriver());
 			return new ResultFlightHotelsPage(getDriver());

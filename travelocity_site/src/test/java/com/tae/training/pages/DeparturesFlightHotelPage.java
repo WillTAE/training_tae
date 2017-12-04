@@ -25,16 +25,19 @@ public class DeparturesFlightHotelPage extends BasePage {
 	@FindBy(how=How.ID, using="flightSearchResultDiv")
 	private WebElement PROGRESS_BAR;
 	
+	@FindBy(how=How.ID, using="loaderForEmailAlertMenu")
+	private WebElement pageActiveLoader;
+	
 	public ReturningFlightHotelPage selectFirstDepartingFlight(){
-		getWait().until(ExpectedConditions.elementToBeClickable(priceDropdown));
-		getWait().withTimeout(30, TimeUnit.SECONDS).until(ExpectedConditions.refreshed(ExpectedConditions
-				.visibilityOfAllElementsLocatedBy(By.className("flex-card"))));
-		List<WebElement> flightsList = flightsListContainer.findElements(By.className("button-column"));
+		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.invisibilityOf(pageActiveLoader)));
+		/*getWait().until(ExpectedConditions.refreshed(ExpectedConditions
+				.visibilityOfAllElementsLocatedBy(By.className("flex-card"))));*/
+		List<WebElement> flightsList = flightsListContainer.findElements(By.tagName("li"));
 		for (WebElement flightOptions: flightsList){
 			flightOptions.findElement(By.tagName("button")).click();
 			break;
 		}
-		getWait().until(ExpectedConditions.visibilityOf(PROGRESS_BAR));
+		getWait().until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(priceDropdown)));
 		return new ReturningFlightHotelPage(getDriver());
 	}
 }

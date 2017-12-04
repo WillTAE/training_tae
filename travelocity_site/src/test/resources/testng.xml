@@ -2,10 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="My Test Suite" verbose="1">
-	<parameter name="browser" value="chrome"></parameter>
+	<parameter name="browser" value="firefox"></parameter>
 	<test name="My first test">
 		<classes>
-			<class name="com.tae.training.tests.TestTravelocity"></class>
+			<class name="com.tae.training.tests.TestTravelocity">
+			<methods>
+			<include name="exercise1"/>
+			<exclude name="exercise2"/>
+			<exclude name="exercise3"/>
+			</methods>
+			</class>
 		</classes>
 	</test>
 </suite>
