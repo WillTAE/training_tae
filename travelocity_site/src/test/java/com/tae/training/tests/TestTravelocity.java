@@ -102,5 +102,8 @@ public class TestTravelocity extends BaseTest {
 	@Test
 	public void exercise4(){
 		FlightsPage flightsPage = homeTravelocityPage.getFlightsPage(homeTravelocityPage.getDriver());
+		flightsPage.searchFlight("LAS", "LAX", "20", "3", "10", "15");
+		softAssert.assertTrue(flightsPage.getErrorMessageText().
+				equals("Your partial check-in and check-out dates must fall within your arrival and departure dates. Please review your dates."), "Not able to verify Error Message");
 	}
 }
