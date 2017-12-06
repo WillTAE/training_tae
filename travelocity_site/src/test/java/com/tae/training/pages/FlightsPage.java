@@ -1,5 +1,8 @@
 package com.tae.training.pages;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,6 +47,11 @@ public class FlightsPage extends BasePage {
 	@FindBy(xpath="//*[@id='package-returning-wrapper-flp-fh']/div/div")
 	private WebElement fliyingToCalendar;
 	
+	@FindBy(xpath="//*[@id='package-checkin-wrapper-flp-fh']/div/div/div[2]")
+	private WebElement checkinCalendar;
+	
+	@FindBy(xpath="//*[@id='package-checkout-wrapper-flp-fh']/div/div")
+	private WebElement checkoutCalendar;
 	
     
 	public ResultOnlyFlightsPage searchFlight(String flyingFrom, String flyingTo, String departingDay, String returningDay, String checkinDay, String checkoutDay){
@@ -54,6 +62,8 @@ public class FlightsPage extends BasePage {
 		flyingToField.clear();
 		flyingToField.sendKeys(flyingTo);
 		onlyHotelCheckbox.click();
+		flyingFromCalendar.clear();
+		List<WebElement> calendarDays = fliyingFromCalendar.findElements(By.tagName("td")); 
 		
 		
 		
