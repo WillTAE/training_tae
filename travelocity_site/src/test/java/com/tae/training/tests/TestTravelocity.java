@@ -10,6 +10,7 @@ import com.tae.training.pages.CarSelectionPage;
 import com.tae.training.pages.DeparturesFlightHotelPage;
 import com.tae.training.pages.DeparturesPage;
 import com.tae.training.pages.FlightHotelPage;
+import com.tae.training.pages.FlightsPage;
 import com.tae.training.pages.HomeTravelocityPage;
 import com.tae.training.pages.HotelsPage;
 import com.tae.training.pages.ResultFlightHotelsPage;
@@ -96,5 +97,10 @@ public class TestTravelocity extends BaseTest {
 		
 		softAssert.assertTrue(resultsHotelOnlyPage.discountSectionIsDisplayed(), "No option of receive a discount is displayed");
 		softAssert.assertTrue(resultsHotelOnlyPage.sponsoredShownFirst(), "Sponsored Hotels not shown first");
+	}
+	
+	@Test
+	public void exercise4(){
+		FlightsPage flightsPage = homeTravelocityPage.getFlightsPage(homeTravelocityPage.getDriver());
 	}
 }

@@ -126,4 +126,8 @@ public class HomeTravelocityPage extends BasePage{
 	public ResultsHotelOnlyPage getResultsHotelOnlyPage(WebDriver driver){
 		return new ResultsHotelOnlyPage(getDriver());
 	}
+	
+	public FlightsPage getFlightsPage(WebDriver driver){
+		return new FlightsPage(getDriver());
+	}
 }
