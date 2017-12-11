@@ -20,8 +20,7 @@ public class ResultsHotelOnlyPage extends BasePage {
 
 	@FindBy(how = How.ID, using = "resultsContainer")
 	private WebElement resultHotelsContainer;
-	// //*[@id="525675_sponsored"]/div[2]/div/div[1]/div[3]/div/div[1]/span/ul/li[5]
-
+	
 	List<WebElement> listOfHotels = resultHotelsContainer.findElements(By.tagName("article"));
 	ArrayList<Integer> arraySponsoredPositions = new ArrayList<>();
 

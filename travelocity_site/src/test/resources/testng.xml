@@ -10,7 +10,8 @@
 			<exclude name="exercise1"/>
 			<exclude name="exercise2"/>
 			<exclude name="exercise3"/>
-			<include name="exercise4"/>
+			<exclude name="exercise4"/>
+			<include name="exercise5"/>
 			</methods>
 			</class>
 		</classes>

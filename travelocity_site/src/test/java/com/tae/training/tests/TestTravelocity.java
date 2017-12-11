@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.tae.training.pages.CarSelectionPage;
+import com.tae.training.pages.CruisesPage;
+import com.tae.training.pages.CruisesResultPage;
 import com.tae.training.pages.DeparturesFlightHotelPage;
 import com.tae.training.pages.DeparturesPage;
 import com.tae.training.pages.FlightHotelPage;
@@ -105,5 +107,17 @@ public class TestTravelocity extends BaseTest {
 		flightsPage.searchFlight("LAS", "LAX", "20", "3", "10", "15");
 		softAssert.assertTrue(flightsPage.getErrorMessageText().
 				equals("Your partial check-in and check-out dates must fall within your arrival and departure dates. Please review your dates."), "Not able to verify Error Message");
+	}
+	
+	@Test
+	public void exercise5(){
+		CruisesPage cruisesPage = homeTravelocityPage.getCruisesPage(homeTravelocityPage.getDriver());
+		cruisesPage.searchCruisers();
+		CruisesResultPage cruisesResultPage = homeTravelocityPage.getCruisesResultPage(homeTravelocityPage.getDriver());
+		softAssert.assertTrue(cruisesResultPage.getGoingToSelected().equals("Europe"), "Not able to verify Going To destiny place");
+		softAssert.assertTrue(cruisesResultPage.getDepartureDateSelected().equals("Apr 2018"), "Not able to verify Departure date for Cruise Searching");
+		cruisesResultPage.selectCruisesLenght();
+		softAssert.assertTrue(cruisesResultPage.cruisesWithAndWithoutDiscount(), "One of both are missing prices with or without discount");
+		
 	}
 }

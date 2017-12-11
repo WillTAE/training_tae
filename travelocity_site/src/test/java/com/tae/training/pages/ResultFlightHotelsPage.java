@@ -146,8 +146,6 @@ public class ResultFlightHotelsPage extends BasePage {
 		}
 		if(getDriver().getWindowHandles().toArray().length > 1){
 			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[1]);
-			/*getDriver().close();
-			getDriver().switchTo().window((String) getDriver().getWindowHandles().toArray()[0]);*/
 		}
 		return new SelectedHotelPage(getDriver());
 	}
